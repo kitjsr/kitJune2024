@@ -16,6 +16,7 @@ exports.create = (req, res) => {
     mobile: req.body.mobile,
     email: req.body.email,
     dob: req.body.dob,
+    password: req.body.password,
     active: req.body.active ? req.body.active : false
   });
 
