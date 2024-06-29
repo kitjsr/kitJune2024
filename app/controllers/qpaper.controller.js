@@ -38,16 +38,16 @@ exports.create = (req, res) => {
 //Retrieve all Question Papers from the database.
 exports.findAll = (req, res) => {
   const qname = req.query.qname;
-  var condition = qname ? { qname: { [Op.like]: `%${qname}%` } } : null;
+  var condition = qname ? { qname: { $regex: new RegExp(title), $options: "i" } } : {};
 
-  User.findAll({ where: condition })
+  Qpaper.find(condition)
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving Users."
+          err.message || "Some error occurred while retrieving."
       });
     });
 };

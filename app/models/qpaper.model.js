@@ -1,10 +1,11 @@
 module.exports = mongoose => {
   var schema = mongoose.Schema(
     {
+      _id:String,
       qname: String,
       ename: String,
       photo: String,
-      active: Boolean
+      // active: Boolean
     },
     { timestamps: true }
   );
