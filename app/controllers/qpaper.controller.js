@@ -35,22 +35,22 @@ exports.create = (req, res) => {
     }
 };
 
-// Retrieve all Users from the database.
-// exports.findAll = (req, res) => {
-//   const uname = req.query.uname;
-//   var condition = uname ? { uname: { [Op.like]: `%${uname}%` } } : null;
+//Retrieve all Question Papers from the database.
+exports.findAll = (req, res) => {
+  const qname = req.query.qname;
+  var condition = qname ? { qname: { [Op.like]: `%${qname}%` } } : null;
 
-//   User.findAll({ where: condition })
-//     .then(data => {
-//       res.send(data);
-//     })
-//     .catch(err => {
-//       res.status(500).send({
-//         message:
-//           err.message || "Some error occurred while retrieving Users."
-//       });
-//     });
-// };
+  User.findAll({ where: condition })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving Users."
+      });
+    });
+};
 
 // // Retrieve all Users from the database.
 // exports.findLoginDetails = (req, res) => {
