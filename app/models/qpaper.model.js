@@ -1,7 +1,8 @@
+// import { Types } from "mongoose";
 module.exports = mongoose => {
   var schema = mongoose.Schema(
     {
-      _id:String,
+      // _id: new Types.ObjectId(), 
       qname: String,
       ename: String,
       photo: String,

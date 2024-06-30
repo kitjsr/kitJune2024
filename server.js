@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
 const app = express();
 
 var corsOptions = {
@@ -33,7 +35,27 @@ db.mongoose
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to backend application." });
 });
+///////////
 
+app.post('/upload', upload.single('file'), (req, res) => {
+  try {
+    const ename = req.body.ename;
+    const qname = req.body.qname;
+    const file = req.file;
+
+    console.log('Title:', ename);
+    console.log('Title:', qname);
+    console.log('File:', file);
+
+    // Process the file and title here...
+
+    res.status(200).send('File uploaded successfully');
+  } catch (error) {
+    console.error('Error processing upload:', error);
+    res.status(500).send('Server error');
+  }
+});
+//////////////
 require("./app/routes/student.routes")(app);
 require("./app/routes/qpaper.routes")(app);
 

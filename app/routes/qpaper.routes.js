@@ -34,7 +34,7 @@ module.exports = app => {
   // Create a new User
   // router.post("/", users.create);
   // router.post("/", uploadFile.single("photo"),users.create);
-  router.post("/upload", uploadFile.single("photo"), qpapers.create);
+  router.post("/upload", uploadFile.single("file"), qpapers.create);
   // Retrieve all Questions
   router.get("/upload", qpapers.findAll);
   app.use("/api/qpapers", router);

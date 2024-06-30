@@ -7,23 +7,25 @@ const fs = require("fs");
 
 // Create and Save a new User
 exports.create = (req, res) => {
-  
+  console.log("Hello")
     try {
-      console.log(req.file);
+      // console.log(req);
   
-      if (req.file == undefined) {
+      if (req.file === undefined) {
         return res.send(`You must select a file.`);
+        console.log("You must select a file.");
       }
   
       Qpaper.create({
         qname: req.body.qname,
         ename: req.body.ename,
         photo: req.file.filename,
+        
         // photo: req.file.originalname,
-        published: req.body.published ? req.body.published : false,
-        kit: fs.readFileSync(
-          __basedir + "../../../uploads/" + req.file.filename
-        ),
+        // published: req.body.published ? req.body.published : false,
+        // kit: fs.readFileSync(
+        //   __basedir + "../../../uploads/" + req.file.filename
+        // ),
         
       }).then(data => {
             return res.send(data);
