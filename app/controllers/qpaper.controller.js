@@ -75,7 +75,7 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
-  User.findByPk(id)
+  Qpaper.findByPk(id)
     .then(data => {
       res.send(data);
     })
