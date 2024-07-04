@@ -37,6 +37,7 @@ module.exports = app => {
   router.post("/upload", uploadFile.single("file"), qpapers.create);
   // Retrieve all Questions
   router.get("/upload", qpapers.findAll);
+  
   // Retrieve One Questions
   router.get("/upload/:id", qpapers.findOne);
   app.use("/api/qpapers", router);

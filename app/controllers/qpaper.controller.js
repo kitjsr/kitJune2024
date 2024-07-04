@@ -75,15 +75,17 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
-  Qpaper.findByPk(id)
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: "Error retrieving User with id=" + id
-      });
-    });
+  Qpaper.findById(id)
+  .then(data => {
+    if (!data)
+      res.status(404).send({ message: "Not found Question with id " + id });
+    else res.send(data);
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .send({ message: "Error retrieving Question with id=" + id });
+  });
 };
 
 // // Update a User by the id in the request
