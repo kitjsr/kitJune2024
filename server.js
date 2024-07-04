@@ -36,7 +36,11 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to backend application." });
 });
 ///////////
-
+// Function to serve all static files
+// inside public directory.
+app.use(express.static('public'));
+app.use('/uploads', express.static('uploads'));
+//////////////
 app.post('/upload', upload.single('file'), (req, res) => {
   try {
     const ename = req.body.ename;
