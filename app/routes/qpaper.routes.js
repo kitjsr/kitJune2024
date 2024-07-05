@@ -42,10 +42,10 @@ module.exports = app => {
   router.get("/upload/:id", qpapers.findOne);
 
   // Update a question with id
-  router.put("/:id", students.update);
+  router.put("/upload/:id", qpapers.update);
 
   // Delete a question with id
-  router.delete("/:id", students.delete);
+  router.delete("/upload/:id", qpapers.delete);
 
   app.use("/api/qpapers", router);
 };
