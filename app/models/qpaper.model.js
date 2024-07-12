@@ -6,6 +6,7 @@ module.exports = mongoose => {
       qname: String,
       ename: String,
       photo: String,
+      username:String
       // active: Boolean
     },
     { timestamps: true }
