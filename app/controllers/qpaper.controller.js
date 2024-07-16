@@ -20,6 +20,7 @@ exports.create = (req, res) => {
         qname: req.body.qname,
         ename: req.body.ename,
         username: req.body.username,
+        status: req.body.status ? req.body.status : false,
         photo: req.file.filename,
         
         
