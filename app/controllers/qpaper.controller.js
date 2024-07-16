@@ -19,17 +19,13 @@ exports.create = (req, res) => {
       Qpaper.create({
         qname: req.body.qname,
         ename: req.body.ename,
-        photo: req.file.filename,
         username: req.body.username,
+        photo: req.file.filename,
         
-        // photo: req.file.originalname,
-        // published: req.body.published ? req.body.published : false,
-        // kit: fs.readFileSync(
-        //   __basedir + "../../../uploads/" + req.file.filename
-        // ),
         
       }).then(data => {
             return res.send(data);
+            console.log(data)
             return res.send(`File has been uploaded.`);
       });
     } catch (error) {
