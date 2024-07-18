@@ -11,5 +11,6 @@ db.role = require("./role.model");
 db.ROLES = ["user", "admin", "moderator"];
 db.students = require("./student.model.js")(mongoose);
 db.qpapers = require("./qpaper.model.js")(mongoose);
+db.publishers = require("./publisher.model.js")(mongoose);
 
 module.exports = db;
