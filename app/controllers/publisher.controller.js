@@ -13,7 +13,9 @@ exports.create = (req, res) => {
   const publisher = new Publisher({
     name: req.body.name,
     mobile: req.body.mobile,
+    email:req.body.email,
     address: req.body.address,
+    
     active: req.body.active ? req.body.active : false
   });
 
