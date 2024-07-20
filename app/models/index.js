@@ -13,5 +13,6 @@ db.students = require("./student.model.js")(mongoose);
 db.qpapers = require("./qpaper.model.js")(mongoose);
 db.publishers = require("./publisher.model.js")(mongoose);
 db.cats = require("./cat.model.js")(mongoose);
+db.customers = require("./customer.model.js")(mongoose);
 
 module.exports = db;
