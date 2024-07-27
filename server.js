@@ -87,6 +87,7 @@ require("./app/routes/qpaper.routes")(app);
 require("./app/routes/publisher.routes")(app);
 require("./app/routes/cat.routes")(app);
 require("./app/routes/customer.routes")(app);
+require("./app/routes/book.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8090;
