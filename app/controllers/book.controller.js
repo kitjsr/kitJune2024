@@ -1,6 +1,6 @@
 const db = require("../models");
 const Book = db.books;
-
+const Publisher = db.publishers;
 // Create and Save a new Book
 exports.create = (req, res) => {
   // Validate request
@@ -20,7 +20,7 @@ exports.create = (req, res) => {
   });
 
   // Save Book in the database
-  Book
+  book
     .save(book)
     .then(data => {
       res.send(data);
@@ -34,22 +34,54 @@ exports.create = (req, res) => {
 };
 
 // Retrieve all Books from the database.
+// exports.findAll = (req, res) => {
+//   const name = req.query.name;
+//   var condition = name ? { name: { $regex: new RegExp(name), $options: "i" } } : {};
+
+//   Book.find(condition)
+//     .then(data => {
+//       res.send(data);
+//     })
+//     .catch(err => {
+//       res.status(500).send({
+//         message:
+//           err.message || "Some error occurred while retrieving Books."
+//       });
+//     });
+// };
+
 exports.findAll = (req, res) => {
-  const name = req.query.name;
-  var condition = name ? { fullname: { $regex: new RegExp(name), $options: "i" } } : {};
-
-  Book.find(condition)
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving Books."
-      });
+  // const name = req.query.name;
+  // var condition = name ? { name: { $regex: new RegExp(name), $options: "i" } } : {};
+  // Book.aggregate([
+  //   {
+  //     $lookup: {
+  //       from: Publisher, // The name of the second collection
+  //       localField: 'publisher', // Field from the first collection
+  //       foreignField: 'id', // Field from the second collection
+  //       as: 'joinedData' // Output array field
+  //     }
+  //   }
+  // ]);
+  Book.aggregate([
+    {
+      $lookup: {
+        from: 'publishers', // Name of the publisher collection (must match the collection name in MongoDB)
+        localField: 'publisher', // Field in the Book collection
+        foreignField: '_id', // Field in the Publisher collection
+        as: 'publisherDetails' // Output field
+      }
+    }
+  ])
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message: err.message || "Some error occurred while retrieving books and publishers."
     });
+  });
 };
-
 // Find a single Book with an id
 exports.findOne = (req, res) => {
   const id = req.params.id;
