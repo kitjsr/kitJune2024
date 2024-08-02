@@ -1,7 +1,8 @@
 module.exports = mongoose => {
   var schema = mongoose.Schema(
     {
-      name: String,
+      isbn: String,
+      title: String,
       publisher: { type: mongoose.Schema.Types.ObjectId, ref: 'Publisher' }, // Reference to Publisher,
       category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' }, // Reference to Publisher,
       price: Number,
