@@ -4,15 +4,17 @@ const Publisher = db.publishers;
 // Create and Save a new Book
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.name) {
+  if (!req.body.title) {
     res.status(400).send({ message: "Book Name can not be empty!" });
     return;
   }
 
   // Create a Book
   const book = new Book({
-    name: req.body.name,
+    isbn: req.body.isbn,
+    title: req.body.title,
     publisher: req.body.publisher,
+    category: req.body.category,
     price: req.body.price,
     edition: req.body.edition,
     author: req.body.author,

@@ -3,6 +3,7 @@ module.exports = mongoose => {
     {
       name: String,
       publisher: { type: mongoose.Schema.Types.ObjectId, ref: 'Publisher' }, // Reference to Publisher,
+      category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' }, // Reference to Publisher,
       price: Number,
       edition: Number,
       author: String,
