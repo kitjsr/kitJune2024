@@ -1,6 +1,8 @@
 const db = require("../models");
 const Book = db.books;
 const Publisher = db.publishers;
+
+const mongoose = require('mongoose');
 // Create and Save a new Book
 exports.create = (req, res) => {
   // Validate request
@@ -100,12 +102,50 @@ exports.findAll = (req, res) => {
 // Find a single Book with an id
 exports.findOne = (req, res) => {
   const id = req.params.id;
-
+// Ensure the ID is a valid ObjectId
+if (!mongoose.Types.ObjectId.isValid(id)) {
+  return res.status(400).send({ message: "Invalid book ID format" });
+}
   Book.findById(id)
     .then(data => {
       if (!data)
         res.status(404).send({ message: "Not found Book with id " + id });
-      else res.send(data);
+      else {
+        
+        Book.aggregate([
+          { $match: { _id: mongoose.Types.ObjectId(id) } },
+          {
+            $lookup: {
+              from: 'publishers', // Ensure this matches the actual collection name in MongoDB
+              localField: 'publisher',
+              foreignField: '_id',
+              as: 'publisherDetails'
+            }
+          },
+          {
+            $lookup: {
+              from: 'cats', // Ensure this matches the actual collection name in MongoDB
+              localField: 'category',
+              foreignField: '_id',
+              as: 'categoryDetails'
+            }
+          }
+        ]).then(data => {
+          if (data.length === 0) {
+            console.log('No books found or no matching publishers/categories');
+          } 
+          else{
+            res.send(data);
+      
+          }
+        })
+        .catch(err => {
+          res.status(500).send({
+            message: err.message || "Some error occurred while retrieving books and publishers."
+          });
+        });
+        // res.send(data);
+      }
     })
     .catch(err => {
       res
