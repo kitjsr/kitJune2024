@@ -15,8 +15,11 @@ exports.create = (req, res) => {
     username: req.body.username,
     mobile: req.body.mobile,
     email: req.body.email,
-    dob: req.body.dob,
-    password: req.body.password,
+    address: req.body.address,
+    course: req.body.course,
+    branch: req.body.branch,
+    session: req.body.session,
+    photo: req.body.photo,
     active: req.body.active ? req.body.active : false
   });
 

@@ -15,5 +15,6 @@ db.publishers = require("./publisher.model.js")(mongoose);
 db.cats = require("./cat.model.js")(mongoose);
 db.customers = require("./customer.model.js")(mongoose);
 db.books = require("./book.model.js")(mongoose);
+db.courses = require("./course.model.js")(mongoose);
 
 module.exports = db;

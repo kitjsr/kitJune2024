@@ -5,9 +5,15 @@ module.exports = mongoose => {
       username: String,
       mobile: String,
       email: String,
-      dob: String,
-      password: String,
+      address: String,
+      course: { type: mongoose.Schema.Types.ObjectId, ref: 'Course' }, // Reference to Branch,,
+      branch: { type: mongoose.Schema.Types.ObjectId, ref: 'Branch' }, // Reference to Branch,
+      session: String,
+      photo: String,
       active: Boolean
+
+      
+    
     },
     { timestamps: true }
   );
