@@ -38,7 +38,7 @@ exports.create = (req, res) => {
 //Retrieve all Question Papers from the database.
 exports.findAll = (req, res) => {
   const qname = req.query.qname;
-  var condition = qname ? { qname: { $regex: new RegExp(title), $options: "i" } } : {};
+  var condition = qname ? { qname: { $regex: new RegExp(qname), $options: "i" } } : {};
 
   Qpaper.find(condition)
     .then(data => {

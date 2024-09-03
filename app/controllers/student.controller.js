@@ -1,6 +1,10 @@
 const db = require("../models");
 const Student = db.students;
 
+const fs = require("fs");
+  //C:\Users\Administrator\AngularNodeExpressMySQL\node-js-server\resources\static\assets
+  //C:\Users\Administrator\AngularNodeExpressMySQL\node-js-server\app\resources\static\assets\uploads\
+  global.__basedir = __dirname;
 // Create and Save a new Student
 exports.create = (req, res) => {
   // Validate request
@@ -8,18 +12,20 @@ exports.create = (req, res) => {
     res.status(400).send({ message: "Name can not be empty!" });
     return;
   }
-
+  if (req.file === undefined) {
+    return res.send(`You must select a file.`);
+    console.log("You must select a file.");
+  }
   // Create a Student
   const student = new Student({
     fullname: req.body.fullname,
-    username: req.body.username,
     mobile: req.body.mobile,
     email: req.body.email,
     address: req.body.address,
     course: req.body.course,
     branch: req.body.branch,
-    session: req.body.session,
-    photo: req.body.photo,
+    ssession: req.body.ssession,
+    photo: req.file.filename,
     active: req.body.active ? req.body.active : false
   });
 

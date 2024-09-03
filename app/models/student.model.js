@@ -2,17 +2,14 @@ module.exports = mongoose => {
   var schema = mongoose.Schema(
     {
       fullname: String,
-      username: String,
       mobile: String,
       email: String,
       address: String,
       course: { type: mongoose.Schema.Types.ObjectId, ref: 'Course' }, // Reference to Branch,,
       branch: { type: mongoose.Schema.Types.ObjectId, ref: 'Branch' }, // Reference to Branch,
-      session: String,
+      ssession: String,
       photo: String,
       active: Boolean
-
-      
     
     },
     { timestamps: true }
