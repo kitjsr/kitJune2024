@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const cookieSession = require("cookie-session");
-
+var path=require('path');
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 const app = express();
@@ -78,6 +78,12 @@ app.post('/upload', upload.single('file'), (req, res) => {
     console.error('Error processing upload:', error);
     res.status(500).send('Server error');
   }
+});
+
+app.get('/uploads/:filename', (req, res) => {
+  const filename = req.params.filename;
+  const filePath = path.join(__dirname, 'uploads', filename);
+  res.sendFile(filePath);
 });
 //////////////
 require("./app/routes/auth.routes")(app);
