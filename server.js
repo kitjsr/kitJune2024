@@ -96,6 +96,7 @@ require("./app/routes/customer.routes")(app);
 require("./app/routes/book.routes")(app);
 require("./app/routes/course.routes")(app);
 require("./app/routes/branch.routes")(app);
+require("./app/routes/bissue.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8090;
