@@ -45,19 +45,51 @@ exports.create = (req, res) => {
 
 // Retrieve all Students from the database.
 exports.findAll = (req, res) => {
-  const fullname = req.query.fullname;
-  var condition = fullname ? { fullname: { $regex: new RegExp(title), $options: "i" } } : {};
+  // const fullname = req.query.fullname;
+  // var condition = fullname ? { fullname: { $regex: new RegExp(title), $options: "i" } } : {};
 
-  Student.find(condition)
-    .then(data => {
+  // Student.find(condition)
+  //   .then(data => {
+  //     res.send(data);
+  //   })
+  //   .catch(err => {
+  //     res.status(500).send({
+  //       message:
+  //         err.message || "Some error occurred while retrieving Students."
+  //     });
+  //   });
+  Student.aggregate([
+    {
+      $lookup: {
+        from: 'courses', // Ensure this matches the actual collection name in MongoDB
+        localField: 'course',
+        foreignField: '_id',
+        as: 'courseDetails'
+      }
+    },
+    {
+      $lookup: {
+        from: 'branches', // Ensure this matches the actual collection name in MongoDB
+        localField: 'branch',
+        foreignField: '_id',
+        as: 'branchDetails'
+      }
+    }
+  ])
+  .then(data => {
+    if (data.length === 0) {
+      console.log('No Student found or no matching branch/courses');
+    } 
+    else{
       res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving Students."
-      });
+
+    }
+  })
+  .catch(err => {
+    res.status(500).send({
+      message: err.message || "Some error occurred while retrieving students."
     });
+  });
 };
 
 // Find a single Student with an id
